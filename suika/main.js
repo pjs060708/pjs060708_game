@@ -1,11 +1,15 @@
+import {fruits} from "/suika/fruits.js";
+
 var Engine = Matter.Engine,
     Render = Matter.Render,
     Runner = Matter.Runner,
     Bodies = Matter.Bodies,
     World = Matter.World;
 
+// 엔진 선언
 const engine = Engine.create();
 
+// 렌더 선언
 const render = Render.create({
     engine,
     element:document.body,
@@ -49,3 +53,16 @@ World.add(world, [leftWall, rightWall, ground, topLine]);
 
 Render.run(render);
 Render.run(engine);
+
+function addFruit(){
+    const index = 0;
+    const fruit = fruits[index];
+    const body = Bodies.circle(300, 50, fruit.radius, {
+        render:{
+            sprite:{textrue:`${fruit.name}.png`},
+        }
+    });
+    World.add(world, body)
+}
+
+addFruit();
